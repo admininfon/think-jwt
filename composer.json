@@ -1,5 +1,5 @@
 {
-  "name": "kangshutian/think_jwt",
+  "name": "kangst/think-jwt",
   "description": "JSON Web Token Authentication for thinkPHP",
   "keywords": [
     "jwt_auth",
@@ -11,12 +11,12 @@
   ],
   "type": "library",
   "license": "MIT",
-  "homepage": "https://github.com/admininfon/think_jwt",
+  "homepage": "https://github.com/admininfon/think-jwt.git",
   "authors": [
     {
       "name": "Kang Shutian",
       "email": "kst157521@163.com",
-      "homepage": "https://github.com/admininfon/think_jwt",
+      "homepage": "https://github.com/admininfon/think-jwt.git",
       "role": "Admin"
     }
   ],
@@ -24,13 +24,18 @@
     "sort-packages": true
   },
   "minimum-stability": "dev",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  },
   "require": {
-    "php": "^7.1",
-    "topthink/framework": "^5.1.*"
+    "php": "^5.6 || ^7.0",
+    "topthink/framework": "^6.0.0"
   },
   "autoload": {
     "psr-4": {
-      "Kangshutian\\JWTAuth\\": "src/"
+      "Kangst\\JWTAuth\\": "src/"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-    "name": "kangshutian/think-jwt",
+    "name": "kangst/think-jwt",
     "description": "JSON Web Token Authentication for thinkPHP",
     "keywords": [
         "jwt_auth",
@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kangshutian\\JWTAuth\\": "src/"
+            "Kangst\\JWTAuth\\": "src/"
         }
     }
 }

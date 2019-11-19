@@ -21,11 +21,11 @@ class GenerateConfigFile extends Command
         $paths = explode('vendor/kangst', __DIR__);
         $root_path = current($paths);
 
-        $think_conf_jwt = $root_path . 'jwt.php';
+        $think_conf_jwt = $root_path . 'config/jwt.php';
         $output->writeln($think_conf_jwt);
 
         if (!file_exists($think_conf_jwt)) {
-            $vendor_path = $root_path . 'vendor';
+            $vendor_path = $root_path . 'vendor/';
             $init_conf = $vendor_path  . 'kangst/think-jwt/config/jwt.php';
             file_put_contents($think_conf_jwt, file_get_contents($init_conf));
         }

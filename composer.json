@@ -32,7 +32,8 @@
     "require": {
         "php": "^5.6 || ^7.1",
         "lcobucci/jwt": "~3.3.1",
-        "topthink/framework": "5.1.*"
+        "topthink/framework": "5.1.*",
+        "topthink/think-helper": "dev-master"
     },
     "autoload": {
         "psr-4": {

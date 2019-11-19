@@ -25,8 +25,13 @@ class GenerateConfigFile extends Command
 
         $config_path = $think_app->getConfigPath();
         $think_conf_jwt = $config_path . 'jwt.php';
+        $output->writeln($think_conf_jwt);
+
         if (!file_exists($think_conf_jwt)) {
             $vendor_path = $think_app->env->get('vendor_path');
+            $output->writeln($vendor_path);
+            $output->writeln(__DIR__);
+
             $init_conf = $vendor_path  . 'kangst/think-jwt/config/jwt.php';
             file_put_contents($think_conf_jwt, file_get_contents($init_conf));
         }

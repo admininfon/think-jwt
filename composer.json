@@ -31,9 +31,9 @@
     },
     "require": {
         "php": "^5.6 || ^7.1",
-        "lcobucci/jwt": "~3.3.1",
+        "lcobucci/jwt": "3.3.*",
         "topthink/framework": "5.1.*",
-        "topthink/think-helper": "dev-master"
+        "topthink/think-helper": "3.1.*"
     },
     "autoload": {
         "psr-4": {

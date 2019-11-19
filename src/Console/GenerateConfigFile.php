@@ -9,7 +9,7 @@ use think\console\Input;
 use think\console\Output;
 use think\helper\Str;
 
-abstract class GenerateConfigFile extends Command
+class GenerateConfigFile extends Command
 {
     protected function configure()
     {

@@ -20,20 +20,18 @@
             "role": "Admin"
         }
     ],
-    "config": {
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
     },
     "require": {
-        "php": "^5.6 || ^7.1",
+        "php": ">=5.6.0",
         "lcobucci/jwt": "3.3.*",
         "topthink/framework": "5.1.*",
-        "topthink/think-helper": "3.1.*"
+        "topthink/think-helper": "^3.1",
+        "nesbot/carbon": "^2.26",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {

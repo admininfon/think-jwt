@@ -4,10 +4,10 @@
 namespace Kangst\JWTAuth\Claims;
 
 
-use Kangst\JWTAuth\Contracts\Claim as ClaimContract;
+use Kangst\JWTAuth\Contracts\ClaimInterface as ClaimContract;
 use JsonSerializable;
 
-abstract class Claim implements ClaimContract, JsonSerializable
+abstract class ClaimInterface implements ClaimContract, JsonSerializable
 {
     /**
      * The claim name.

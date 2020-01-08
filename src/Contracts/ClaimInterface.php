@@ -4,7 +4,7 @@
 namespace Kangst\JWTAuth\Contracts;
 
 
-interface Claim
+interface ClaimInterface
 {
     /**
      * Set the claim value, and call a validate method.

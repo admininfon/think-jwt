@@ -11,7 +11,7 @@
 namespace Kangst\JWTAuth\Claims;
 
 
-class Subject extends Claim
+class Subject extends ClaimInterface
 {
     /**
      * {@inheritdoc}

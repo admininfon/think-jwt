@@ -32,11 +32,11 @@ class Collection extends \think\Collection
      * @param callable $callback
      * @param mixed $default
      *
-     * @return \Kangst\JWTAuth\Claims\Claim
+     * @return \Kangst\JWTAuth\Claims\ClaimInterface
      */
     public function getByClaimName($name, callable $callback = null, $default = null)
     {
-        return $this->filter(function (Claim $claim) use ($name) {
+        return $this->filter(function (ClaimInterface $claim) use ($name) {
             return $claim->getName() === $name;
         })->first($callback, $default);
     }
@@ -82,7 +82,7 @@ class Collection extends \think\Collection
      */
     public function toPlainArray()
     {
-        return $this->map(function (Claim $claim) {
+        return $this->map(function (ClaimInterface $claim) {
             return $claim->getValue();
         })->toArray();
     }
@@ -106,7 +106,7 @@ class Collection extends \think\Collection
     {
         $claims = [];
         foreach ($items as $key => $value) {
-            if (!is_string($key) && $value instanceof Claim) {
+            if (!is_string($key) && $value instanceof ClaimInterface) {
                 $key = $value->getName();
             }
 

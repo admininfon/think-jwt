@@ -1,15 +1,19 @@
 <?php
-
+/*
+ * This file is part of think-jwt.
+ *
+ * (c) Kang Shutian <kst157521@163.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace Kangst\JWTAuth;
 
 
-use Lcobucci\JWT\Signature;
+use Kangst\JWTAuth\Contracts\TokenInterface;
 
-class Token extends \Lcobucci\JWT\Token
+class Token implements TokenInterface
 {
-    public function __construct(array $headers = ['alg' => 'none'], array $claims = [], Signature $signature = null, array $payload = ['', ''])
-    {
-        parent::__construct($headers, $claims, $signature, $payload);
-    }
+
 }

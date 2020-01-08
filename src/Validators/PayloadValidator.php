@@ -14,7 +14,7 @@ namespace Kangst\JWTAuth\Validators;
 use Kangst\JWTAuth\Claims\Collection;
 use Kangst\JWTAuth\Exceptions\TokenInvalidException;
 
-class PayloadValidator extends Validator
+class PayloadValidator extends ValidatorInterface
 {
     /**
      * The required claims.

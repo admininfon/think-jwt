@@ -11,7 +11,7 @@
 namespace Kangst\JWTAuth\Claims;
 
 
-class Custom extends Claim
+class Custom extends ClaimInterface
 {
     /**
      * Custom constructor.

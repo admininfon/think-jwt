@@ -8,12 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Kangst\JWTAuth;
+namespace Kangst\JWTAuth\Contracts;
 
 
-use Kangst\JWTAuth\Contracts\JWTInterface;
-
-class JWT implements JWTInterface
+interface JWTInterface
 {
 
 }

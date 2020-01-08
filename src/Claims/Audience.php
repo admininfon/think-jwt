@@ -11,7 +11,7 @@
 namespace Kangst\JWTAuth\Claims;
 
 
-class Audience extends Claim
+class Audience extends ClaimInterface
 {
     /**
      * {@inheritdoc}

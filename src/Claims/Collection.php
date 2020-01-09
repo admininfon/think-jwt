@@ -11,7 +11,9 @@
 namespace Kangst\JWTAuth\Claims;
 
 
-class Collection extends \think\Collection
+use think\Collection as ThinkCollection;
+
+class Collection extends ThinkCollection
 {
     /**
      * Create a new collection.

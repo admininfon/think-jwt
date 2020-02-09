@@ -1,41 +1,40 @@
 {
-  "name": "kangst/think-jwt",
-  "description": "JSON Web Token Authentication for thinkPHP",
-  "keywords": [
-    "jwt_auth",
-    "authentication",
-    "json web token",
-    "jwt",
-    "ThinkPHP",
-    "auth"
-  ],
-  "type": "library",
-  "license": "MIT",
-  "homepage": "https://github.com/admininfon/think-jwt.git",
-  "authors": [
-    {
-      "name": "Kang Shutian",
-      "email": "kst157521@163.com",
-      "homepage": "https://github.com/admininfon/think-jwt.git",
-      "role": "Admin"
+    "name": "kangst/think-jwt",
+    "description": "JSON Web Token Authentication for thinkPHP",
+    "keywords": [
+        "jwt_auth",
+        "authentication",
+        "json web token",
+        "jwt",
+        "ThinkPHP",
+        "auth"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/admininfon/think-jwt.git",
+    "authors": [
+        {
+            "name": "Kang Shutian",
+            "email": "kst157521@163.com",
+            "homepage": "https://github.com/admininfon/think-jwt.git",
+            "role": "Admin"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "require": {
+        "php": ">=5.6.0",
+        "topthink/framework": "5.1.*",
+        "topthink/think-helper": "^3.1",
+        "nesbot/carbon": "^2.26",
+        "lcobucci/jwt": "3.3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kangst\\JWTAuth\\": "src/"
+        }
     }
-  ],
-  "config": {
-    "sort-packages": true
-  },
-  "minimum-stability": "dev",
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0.x-dev"
-    }
-  },
-  "require": {
-    "php": "^5.6 || ^7.0",
-    "topthink/framework": "^6.0.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Kangst\\JWTAuth\\": "src/"
-    }
-  }
 }

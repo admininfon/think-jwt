@@ -12,9 +12,28 @@ namespace Kangst\JWTAuth\Providers\Auth;
 
 
 use  Kangst\JWTAuth\Contracts\Providers\Auth as AuthInterface;
+use Kangst\JWTAuth\Exceptions\JWTAuthException;
+use think\Model;
 
 class Auth extends Provider implements AuthInterface
 {
+    /**
+     * @var Model
+     */
+    private $user;
+
+    /**
+     * Auth constructor.
+     * @param Model $user
+     * @throws JWTAuthException
+     */
+    public function __construct($user)
+    {
+        if (! $user instanceof Model) {
+            throw new JWTAuthException('Not a valid data model.');
+        }
+        $this->user = $user;
+    }
 
     /**
      * @inheritDoc

@@ -18,15 +18,26 @@ class GenerateConfigFile extends Command
 
     protected function execute(Input $input, Output $output)
     {
+        $key = Str::random(64);
         $paths = explode('vendor/kangst', __DIR__);
         $root_path = current($paths);
         $think_conf_jwt = $root_path . 'config/jwt.php';
+        $init_conf = $root_path . 'vendor/kangst/think-jwt/config/jwt.php';
+
+        // 文件创建
         if (!file_exists($think_conf_jwt)) {
-            $init_conf = $root_path  . 'vendor/kangst/think-jwt/config/jwt.php';
-            file_put_contents($think_conf_jwt, file_get_contents($init_conf));
+            file_put_contents($think_conf_jwt, str_replace(
+                    "'secret' => env('JWT_SECRET', null),",
+                    "'secret' => env('JWT_SECRET', " . "'{$key}'" . "),",
+                    file_get_contents($init_conf)
+                )
+            );
+            $output->info('配置文件创建成功~');
         }
 
-        $key = Str::random(32);
-        $output->info('成功创建 secret ：' . PHP_EOL . $key . PHP_EOL . '请复制添加进【jwt.php】配置文件');
+        // 生成新的secret不会自动替换
+        if (file_exists($think_conf_jwt)) {
+            $output->info('生成新 secret ：' . PHP_EOL . $key . PHP_EOL . '请替换“jwt.php”文件内“secret”项');
+        }
     }
 }

@@ -15,7 +15,7 @@ use Kangst\JWTAuth\Support\RefreshFlow;
 use Kangst\JWTAuth\Exceptions\JWTException;
 use Kangst\JWTAuth\Contracts\ValidatorInterface as ValidatorContract;
 
-abstract class ValidatorInterface implements ValidatorContract
+abstract class ValidatorAbstract implements ValidatorContract
 {
     use RefreshFlow;
 

@@ -17,6 +17,10 @@ use Kangst\JWTAuth\Exceptions\JWTException;
 use Kangst\JWTAuth\Exceptions\TokenInvalidException;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\Signer\Ecdsa;
+use Lcobucci\JWT\Signer\Ecdsa\Sha256 as ES256;
+use Lcobucci\JWT\Signer\Ecdsa\Sha384 as ES384;
+use Lcobucci\JWT\Signer\Ecdsa\Sha512 as ES512;
 use Lcobucci\JWT\Signer\Hmac;
 use Lcobucci\JWT\Signer\Hmac\Sha256 as HS256;
 use Lcobucci\JWT\Signer\Hmac\Sha384 as HS384;
@@ -79,6 +83,9 @@ class Lcobucci extends Provider implements JWT
         'RS256' => RS256::class,
         'RS384' => RS384::class,
         'RS512' => RS512::class,
+        'ES256' => ES256::class,
+        'ES384' => ES384::class,
+        'ES512' => ES512::class,
     ];
 
     /**

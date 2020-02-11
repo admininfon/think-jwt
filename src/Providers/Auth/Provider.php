@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of think-jwt.
+ * This file is part of Provider.php.
  *
  * (c) Kang Shutian <kst157521@163.com>
  *
@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Kangst\JWTAuth\Contracts;
+namespace Kangst\JWTAuth\Providers\Auth;
 
 
-interface TokenInterface
+abstract class Provider
 {
 
 }

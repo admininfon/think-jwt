@@ -11,9 +11,7 @@
 namespace Kangst\JWTAuth;
 
 
-use Kangst\JWTAuth\Contracts\JWTInterface;
-
-class JWT implements JWTInterface
+class JWT
 {
 
 }

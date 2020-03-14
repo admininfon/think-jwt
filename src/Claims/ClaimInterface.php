@@ -5,9 +5,10 @@ namespace Kangst\JWTAuth\Claims;
 
 
 use Kangst\JWTAuth\Contracts\ClaimInterface as ClaimContract;
-use JsonSerializable;
+use think\contract\Arrayable;
+use think\contract\Jsonable;
 
-abstract class ClaimInterface implements ClaimContract, JsonSerializable
+abstract class ClaimInterface implements Arrayable, ClaimContract, Jsonable, \JsonSerializable
 {
     /**
      * The claim name.
@@ -37,7 +38,7 @@ abstract class ClaimInterface implements ClaimContract, JsonSerializable
      * Set the claim value, and call a validate method.
      *
      * @param mixed $value
-     * @return $this|ClaimContract
+     * @return $this
      * @auther Kang Shutian <kst157521@163.com>
      * @date 2019-11-20 12:07:19
      */
@@ -144,7 +145,7 @@ abstract class ClaimInterface implements ClaimContract, JsonSerializable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [$this->getName() => $this->getValue()];
     }
@@ -156,7 +157,7 @@ abstract class ClaimInterface implements ClaimContract, JsonSerializable
      *
      * @return string
      */
-    public function toJson($options = JSON_UNESCAPED_SLASHES)
+    public function toJson(int $options = JSON_UNESCAPED_SLASHES): string
     {
         return json_encode($this->toArray(), $options);
     }

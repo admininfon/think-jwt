@@ -41,7 +41,7 @@ class PayloadValidator extends ValidatorAbstract
      * Run the validations on the payload array.
      *
      * @param array $value
-     * @return Collection|void
+     * @return Collection
      * @throws TokenInvalidException
      * @throws \Kangst\JWTAuth\Exceptions\TokenExpiredException
      * @auther Kang Shutian <kst157521@163.com>

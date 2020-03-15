@@ -11,51 +11,52 @@
 namespace Kangst\JWTAuth\Providers\Auth;
 
 
-use  Kangst\JWTAuth\Contracts\Providers\Auth as AuthInterface;
-use Kangst\JWTAuth\Exceptions\JWTAuthException;
-use think\Model;
+use Kangst\JWTAuth\Contracts\Providers\Auth as AuthInterface;
+use Kangst\JWTAuth\Contracts\Providers\Guard;
 
 class Auth extends Provider implements AuthInterface
 {
     /**
-     * @var Model
+     * The authentication guard.
+     *
+     * @var Guard
      */
-    private $user;
+    protected $auth;
 
-    /**
-     * Auth constructor.
-     * @param Model $user
-     * @throws JWTAuthException
-     */
-    public function __construct($user)
+    public function __construct(Guard $auth)
     {
-        if (! $user instanceof Model) {
-            throw new JWTAuthException('Not a valid data model.');
-        }
-        $this->user = $user;
+        $this->auth = $auth;
     }
 
     /**
-     * @inheritDoc
+     * Check a user's credentials.
+     *
+     * @param array $credentials
+     * @return bool
      */
     public function byCredentials(array $credentials)
     {
-        // TODO: Implement byCredentials() method.
+        return $this->auth->once($credentials);
     }
 
     /**
-     * @inheritDoc
+     * Authenticate a user via the id.
+     *
+     * @param mixed $id
+     * @return bool
      */
     public function byId($id)
     {
-        // TODO: Implement byId() method.
+        return $this->auth->onceUsingId($id);
     }
 
     /**
-     * @inheritDoc
+     * Get the currently authenticated user.
+     *
+     * @return mixed
      */
     public function user()
     {
-        // TODO: Implement user() method.
+        return $this->auth->user();
     }
 }

@@ -46,28 +46,15 @@ class JWT
     protected $lockSubject = true;
 
     /**
-     * @var string|null
+     * JWT constructor.
+     *
+     * @param Manager $manager
+     * @param Parser  $parser
      */
-    protected $guard = 'default';
-
-    /**
-     * @var Auth
-     */
-    protected $auth;
-
-    public function __construct($guard = null, Manager $manager, Parser $parser)
+    public function __construct(Manager $manager, Parser $parser)
     {
         $this->manager = $manager;
         $this->parser = $parser;
-
-        if (!empty($guard)) {
-            $this->guard = $guard;
-        }
-
-        $config = new Config();
-        $provider = $config->get('jwt.guards.'. $this->guard .'.provider');
-        $auth = new $provider();
-        $this->auth = new Auth($auth);
     }
 
     /**

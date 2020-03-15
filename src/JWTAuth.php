@@ -11,8 +11,8 @@
 namespace Kangst\JWTAuth;
 
 
-use Kangst\JWTAuth\Contracts\Providers\Auth;
 use Kangst\JWTAuth\Http\Parser\Parser;
+use Kangst\JWTAuth\Providers\Auth\Auth;
 
 class JWTAuth extends JWT
 {

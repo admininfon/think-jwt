@@ -35,6 +35,15 @@ interface Authenticatable
     public function getAuthPassword();
 
     /**
+     * getAuthPasswordName
+     *
+     * @return string
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-16 23:43:17
+     */
+    public function getAuthPasswordName();
+
+    /**
      * Get the token value for the "remember me" session.
      *
      * @return string

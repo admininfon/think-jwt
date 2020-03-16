@@ -66,6 +66,18 @@ class GenericUser implements Authenticatable
     }
 
     /**
+     * getAuthPasswordName
+     *
+     * @return string
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-16 23:44:56
+     */
+    public function getAuthPasswordName()
+    {
+        return 'password';
+    }
+
+    /**
      * Get the "remember me" token value.
      *
      * @return string

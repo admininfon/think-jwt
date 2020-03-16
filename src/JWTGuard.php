@@ -17,6 +17,7 @@ use Kangst\JWTAuth\Contracts\Providers\Guard;
 use Kangst\JWTAuth\Contracts\Providers\UserProvider;
 use Kangst\JWTAuth\Exceptions\JWTException;
 use Kangst\JWTAuth\Exceptions\UserNotDefinedException;
+use Kangst\JWTAuth\Providers\Auth\GenericUser;
 use Kangst\JWTAuth\Providers\Auth\User;
 use Kangst\JWTAuth\Support\GuardHelpers;
 use Kangst\JWTAuth\Support\Macroable;
@@ -30,8 +31,7 @@ class JWTGuard implements Guard
 
     /**
      * The user we last attempted to retrieve.
-     *
-     * @var \Kangst\JWTAuth\Contracts\Providers\Authenticatable
+     * @var GenericUser
      */
     protected $lastAttempted;
 
@@ -66,12 +66,15 @@ class JWTGuard implements Guard
     /**
      * Get the currently authenticated user.
      *
-     * @return \Kangst\JWTAuth\Contracts\Providers\Authenticatable|null
+     * @return Authenticatable|Providers\Auth\GenericUser|null
+     * @throws Exceptions\JWTGuardException
      * @throws Exceptions\TokenBlacklistedException
      * @throws JWTException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:33:23
      */
     public function user()
     {
@@ -90,7 +93,7 @@ class JWTGuard implements Guard
     /**
      * Get the currently authenticated user or throws an exception.
      *
-     * @return \Kangst\JWTAuth\Contracts\Providers\Authenticatable
+     * @return AuthenticatableAlias
      * @throws Exceptions\TokenBlacklistedException
      * @throws JWTException
      * @throws UserNotDefinedException

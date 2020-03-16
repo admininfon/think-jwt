@@ -14,13 +14,14 @@ namespace Kangst\JWTAuth\Support;
 use Kangst\JWTAuth\Contracts\Providers\Authenticatable;
 use Kangst\JWTAuth\Contracts\Providers\UserProvider;
 use Kangst\JWTAuth\Exceptions\AuthenticationException;
+use Kangst\JWTAuth\Providers\Auth\GenericUser;
 
 trait GuardHelpers
 {
     /**
      * The currently authenticated user.
      *
-     * @var \Kangst\JWTAuth\Contracts\Providers\Authenticatable
+     * @var GenericUser|Authenticatable
      */
     protected $user;
 
@@ -82,10 +83,10 @@ trait GuardHelpers
     /**
      * Set the current user.
      *
-     * @param  \Kangst\JWTAuth\Contracts\Providers\Authenticatable  $user
+     * @param  GenericUser $user
      * @return $this
      */
-    public function setUser(Authenticatable $user)
+    public function setUser(GenericUser $user)
     {
         $this->user = $user;
 

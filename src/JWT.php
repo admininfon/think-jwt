@@ -12,8 +12,10 @@ namespace Kangst\JWTAuth;
 
 
 use Kangst\JWTAuth\Contracts\JWTSubjectInterface;
+use Kangst\JWTAuth\Contracts\Providers\Authenticatable;
 use Kangst\JWTAuth\Exceptions\JWTException;
 use Kangst\JWTAuth\Http\Parser\Parser;
+use Kangst\JWTAuth\Providers\Auth\GenericUser;
 use Kangst\JWTAuth\Support\CustomClaims;
 use think\Request;
 
@@ -58,11 +60,14 @@ class JWT
     /**
      * Generate a token for a given subject.
      *
-     * @param JWTSubjectInterface $subject
+     * @param GenericUser $subject
      * @return string
      * @throws Exceptions\TokenInvalidException
+     * @throws JWTException
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:41:08
      */
-    public function fromSubject(JWTSubjectInterface $subject)
+    public function fromSubject(GenericUser $subject)
     {
         $payload = $this->makePayload($subject);
 
@@ -72,11 +77,13 @@ class JWT
     /**
      * Alias to generate a token for a given user.
      *
-     * @param JWTSubjectInterface $user
+     * @param GenericUser $user
      * @return string
      * @throws Exceptions\TokenInvalidException
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:40:46
      */
-    public function fromUser(JWTSubjectInterface $user)
+    public function fromUser(GenericUser $user)
     {
         return $this->fromSubject($user);
     }
@@ -225,11 +232,12 @@ class JWT
     /**
      * Create a Payload instance.
      *
-     * @param  JWTSubjectInterface  $subject
-     *
+     * @param GenericUser $subject
      * @return Payload
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:41:26
      */
-    public function makePayload(JWTSubjectInterface $subject)
+    public function makePayload(GenericUser $subject)
     {
         return $this->factory()->customClaims($this->getClaimsArray($subject))->make();
     }
@@ -237,11 +245,12 @@ class JWT
     /**
      * Build the claims array and return it.
      *
-     * @param  JWTSubjectInterface  $subject
-     *
+     * @param GenericUser $subject
      * @return array
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:41:41
      */
-    protected function getClaimsArray(JWTSubjectInterface $subject)
+    protected function getClaimsArray(GenericUser $subject)
     {
         return array_merge(
             $this->getClaimsForSubject($subject),
@@ -253,11 +262,12 @@ class JWT
     /**
      * Get the claims associated with a given subject.
      *
-     * @param  JWTSubjectInterface  $subject
-     *
+     * @param GenericUser|Authenticatable $subject
      * @return array
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:41:58
      */
-    protected function getClaimsForSubject(JWTSubjectInterface $subject)
+    protected function getClaimsForSubject(GenericUser $subject)
     {
         return array_merge([
             'sub' => $subject->getJWTIdentifier(),

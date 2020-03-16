@@ -99,12 +99,15 @@ class JWTAuth extends JWT
     /**
      * Get the authenticated user.
      *
-     * @return \Kangst\JWTAuth\Contracts\JWTSubjectInterface
+     * @return Contracts\Providers\Authenticatable|Providers\Auth\GenericUser|mixed|null
      * @throws Exceptions\JWTException
+     * @throws Exceptions\JWTGuardException
      * @throws Exceptions\TokenBlacklistedException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:40:17
      */
     public function user()
     {

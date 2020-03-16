@@ -59,12 +59,15 @@ class Auth extends Provider implements AuthInterface
     /**
      * Get the currently authenticated user.
      *
-     * @return mixed
+     * @return \Kangst\JWTAuth\Contracts\Providers\Authenticatable|GenericUser|mixed|null
      * @throws \Kangst\JWTAuth\Exceptions\JWTException
+     * @throws \Kangst\JWTAuth\Exceptions\JWTGuardException
      * @throws \Kangst\JWTAuth\Exceptions\TokenBlacklistedException
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:39:47
      */
     public function user()
     {

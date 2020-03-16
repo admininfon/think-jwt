@@ -130,7 +130,7 @@ class User implements UserProvider
      * @param array $credentials
      * @return Authenticatable|GenericUser|void|null
      * @auther Kang Shutian <kst157521@163.com>
-     * @date 2020-03-16 16:06:39
+     * @date 2020-03-17 00:35:46
      */
     public function retrieveByCredentials(array $credentials)
     {

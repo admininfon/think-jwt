@@ -157,7 +157,7 @@ class User implements UserProvider
         // that there are no matching users for these given credential arrays.
         $user = $query->find();
 
-        return $this->getGenericUser($user);
+        return $this->getGenericUser($user ? $user->toArray() : array());
     }
 
     /**

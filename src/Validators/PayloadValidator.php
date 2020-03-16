@@ -40,12 +40,12 @@ class PayloadValidator extends ValidatorAbstract
     /**
      * Run the validations on the payload array.
      *
-     * @param array $value
-     * @return Collection
+     * @param array|Collection $value
+     * @return Collection|void
      * @throws TokenInvalidException
      * @throws \Kangst\JWTAuth\Exceptions\TokenExpiredException
      * @auther Kang Shutian <kst157521@163.com>
-     * @date 2019-11-20 13:57:33
+     * @date 2020-03-16 14:22:11
      */
     public function check($value)
     {

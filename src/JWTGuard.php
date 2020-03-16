@@ -17,6 +17,7 @@ use Kangst\JWTAuth\Contracts\Providers\Guard;
 use Kangst\JWTAuth\Contracts\Providers\UserProvider;
 use Kangst\JWTAuth\Exceptions\JWTException;
 use Kangst\JWTAuth\Exceptions\UserNotDefinedException;
+use Kangst\JWTAuth\Providers\Auth\User;
 use Kangst\JWTAuth\Support\GuardHelpers;
 use Kangst\JWTAuth\Support\Macroable;
 use think\Request;
@@ -49,15 +50,13 @@ class JWTGuard implements Guard
     protected $request;
 
     /**
-     * Instantiate the class.
+     * The guard.
      *
-     * @param  \Kangst\JWTAuth\JWT  $jwt
-     * @param  UserProvider  $provider
-     * @param  Request  $request
-     *
-     * @return void
+     * @var string $guard_name
      */
-    public function __construct(JWT $jwt, UserProvider $provider, Request $request)
+    protected $guard_name;
+
+    public function __construct(JWT $jwt, User $provider, Request $request)
     {
         $this->jwt = $jwt;
         $this->provider = $provider;
@@ -70,6 +69,9 @@ class JWTGuard implements Guard
      * @return \Kangst\JWTAuth\Contracts\Providers\Authenticatable|null
      * @throws Exceptions\TokenBlacklistedException
      * @throws JWTException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function user()
     {
@@ -81,7 +83,7 @@ class JWTGuard implements Guard
             ($payload = $this->jwt->check(true)) &&
             $this->validateSubject()
         ) {
-            return $this->user = $this->provider->retrieveById($payload['sub']);
+            return $this->user = $this->provider->setAuthModel($this->guard_name)->retrieveById($payload['sub']);
         }
     }
 
@@ -90,8 +92,11 @@ class JWTGuard implements Guard
      *
      * @return \Kangst\JWTAuth\Contracts\Providers\Authenticatable
      * @throws Exceptions\TokenBlacklistedException
-     * @throws \Kangst\JWTAuth\Exceptions\UserNotDefinedException
      * @throws JWTException
+     * @throws UserNotDefinedException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function userOrFail()
     {
@@ -121,10 +126,11 @@ class JWTGuard implements Guard
      * @param bool  $login
      * @return bool|string
      * @throws Exceptions\TokenInvalidException
+     * @throws Exceptions\JWTGuardException
      */
     public function attempt(array $credentials = [], $login = true)
     {
-        $this->lastAttempted = $user = $this->provider->retrieveByCredentials($credentials);
+        $this->lastAttempted = $user = $this->provider->setAuthModel($this->guard_name)->retrieveByCredentials($credentials);
 
         if ($this->hasValidCredentials($user, $credentials)) {
             return $login ? $this->login($user) : true;
@@ -198,10 +204,14 @@ class JWTGuard implements Guard
      * @param mixed $id
      * @return string|null
      * @throws Exceptions\TokenInvalidException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * @throws Exceptions\JWTGuardException
      */
     public function tokenById($id)
     {
-        if ($user = $this->provider->retrieveById($id)) {
+        if ($user = $this->provider->setAuthModel($this->guard_name)->retrieveById($id)) {
             return $this->jwt->fromUser($user);
         }
     }
@@ -227,13 +237,16 @@ class JWTGuard implements Guard
     /**
      * Log the given User into the application.
      *
-     * @param  mixed  $id
-     *
+     * @param mixed $id
      * @return bool
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * @throws Exceptions\JWTGuardException
      */
     public function onceUsingId($id)
     {
-        if ($user = $this->provider->retrieveById($id)) {
+        if ($user = $this->provider->setAuthModel($this->guard_name)->retrieveById($id)) {
             $this->setUser($user);
 
             return true;
@@ -245,9 +258,11 @@ class JWTGuard implements Guard
     /**
      * Alias for onceUsingId.
      *
-     * @param  mixed  $id
-     *
+     * @param mixed $id
      * @return bool
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function byId($id)
     {
@@ -389,6 +404,20 @@ class JWTGuard implements Guard
     }
 
     /**
+     * setGuardName
+     *
+     * @param string|null $guard_name
+     * @return $this
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-16 16:38:25
+     */
+    public function setGuardName(string $guard_name = null)
+    {
+        $this->guard_name = $guard_name;
+        return $this;
+    }
+
+    /**
      * Determine if the user matches the credentials.
      *
      * @param  mixed  $user
@@ -398,7 +427,7 @@ class JWTGuard implements Guard
      */
     protected function hasValidCredentials($user, $credentials)
     {
-        return $user !== null && $this->provider->validateCredentials($user, $credentials);
+        return $user !== null && $this->provider->setAuthModel($this->guard_name)->validateCredentials($user, $credentials);
     }
 
     /**
@@ -412,11 +441,11 @@ class JWTGuard implements Guard
     {
         // If the provider doesn't have the necessary method
         // to get the underlying model name then allow.
-        if (! method_exists($this->provider, 'getModel')) {
+        if (! method_exists($this->provider->setAuthModel($this->guard_name), 'getModel')) {
             return true;
         }
 
-        return $this->jwt->checkSubjectModel($this->provider->getModel());
+        return $this->jwt->checkSubjectModel($this->provider->setAuthModel($this->guard_name)->getModel());
     }
 
     /**

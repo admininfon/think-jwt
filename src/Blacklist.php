@@ -11,7 +11,7 @@
 namespace Kangst\JWTAuth;
 
 
-use Kangst\JWTAuth\Contracts\Providers\Storage;
+use Kangst\JWTAuth\Providers\Storage\Storage;
 use Kangst\JWTAuth\Support\Utils;
 
 class Blacklist
@@ -19,7 +19,7 @@ class Blacklist
     /**
      * The storage.
      *
-     * @var \Kangst\JWTAuth\Contracts\Providers\Storage
+     * @var Storage
      */
     protected $storage;
 
@@ -44,12 +44,6 @@ class Blacklist
      */
     protected $key = 'jti';
 
-    /**
-     * constructor.
-     *
-     * @param \Kangst\JWTAuth\Contracts\Providers\Storage $storage
-     * @return void
-     */
     public function __construct(Storage $storage)
     {
         $this->storage = $storage;

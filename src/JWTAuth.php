@@ -19,18 +19,16 @@ class JWTAuth extends JWT
     /**
      * The authentication provider.
      *
-     * @var \Kangst\JWTAuth\Contracts\Providers\Auth
+     * @var Auth
      */
     protected $auth;
 
     /**
-     * Constructor.
+     * JWTAuth constructor.
      *
-     * @param  \Kangst\JWTAuth\Manager  $manager
-     * @param  \Kangst\JWTAuth\Contracts\Providers\Auth  $auth
-     * @param  \Kangst\JWTAuth\Http\Parser\Parser  $parser
-     *
-     * @return void
+     * @param Manager $manager
+     * @param Auth    $auth
+     * @param Parser  $parser
      */
     public function __construct(Manager $manager, Auth $auth, Parser $parser)
     {

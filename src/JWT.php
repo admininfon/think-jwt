@@ -14,9 +14,7 @@ namespace Kangst\JWTAuth;
 use Kangst\JWTAuth\Contracts\JWTSubjectInterface;
 use Kangst\JWTAuth\Exceptions\JWTException;
 use Kangst\JWTAuth\Http\Parser\Parser;
-use Kangst\JWTAuth\Providers\Auth\Auth;
 use Kangst\JWTAuth\Support\CustomClaims;
-use think\Config;
 use think\Request;
 
 class JWT

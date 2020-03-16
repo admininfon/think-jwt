@@ -55,12 +55,12 @@ class Lcobucci extends Provider implements JWT
 
     /**
      * Lcobucci constructor.
+     *
      * @param Builder $builder
-     * @param Parser $parser
-     * @param $secret
-     * @param $algo
-     * @param array $keys
-     * @throws JWTException
+     * @param Parser  $parser
+     * @param         $secret
+     * @param         $algo
+     * @param array   $keys
      */
     public function __construct(Builder $builder, Parser $parser, $secret, $algo, array $keys)
     {
@@ -159,12 +159,19 @@ class Lcobucci extends Provider implements JWT
     }
 
     /**
-     * @inheritDoc
+     * isAsymmetric
+     *
+     * @return bool
+     * @throws \ReflectionException
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-15 18:44:41
      */
     protected function isAsymmetric()
     {
         $reflect = new \ReflectionClass($this->signer);
 
-        return $reflect->isSubclassOf(Rsa::class) || $reflect->isSubclassOf(Hmac::class);
+        return $reflect->isSubclassOf(Rsa::class)
+            || $reflect->isSubclassOf(Hmac::class)
+            || $reflect->isSubclassOf(Ecdsa::class);
     }
 }

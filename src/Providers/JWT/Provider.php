@@ -45,7 +45,7 @@ abstract class Provider
      *
      * @return void
      */
-    public function __construct(string $secret, string $algo, array $keys)
+    public function __construct(string $secret = null, string $algo = null, array $keys = array())
     {
         $this->secret = $secret;
         $this->algo = $algo;

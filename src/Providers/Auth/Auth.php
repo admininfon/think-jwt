@@ -12,18 +12,18 @@ namespace Kangst\JWTAuth\Providers\Auth;
 
 
 use Kangst\JWTAuth\Contracts\Providers\Auth as AuthInterface;
-use Kangst\JWTAuth\Contracts\Providers\Guard;
+use Kangst\JWTAuth\JWTGuard;
 
 class Auth extends Provider implements AuthInterface
 {
     /**
      * The authentication guard.
      *
-     * @var Guard
+     * @var
      */
     protected $auth;
 
-    public function __construct(Guard $auth)
+    public function __construct(JWTGuard $auth)
     {
         $this->auth = $auth;
     }
@@ -33,6 +33,7 @@ class Auth extends Provider implements AuthInterface
      *
      * @param array $credentials
      * @return bool
+     * @throws \Kangst\JWTAuth\Exceptions\TokenInvalidException
      */
     public function byCredentials(array $credentials)
     {
@@ -54,6 +55,8 @@ class Auth extends Provider implements AuthInterface
      * Get the currently authenticated user.
      *
      * @return mixed
+     * @throws \Kangst\JWTAuth\Exceptions\JWTException
+     * @throws \Kangst\JWTAuth\Exceptions\TokenBlacklistedException
      */
     public function user()
     {

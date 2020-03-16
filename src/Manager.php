@@ -13,18 +13,16 @@ namespace Kangst\JWTAuth;
 
 use Kangst\JWTAuth\Exceptions\JWTException;
 use Kangst\JWTAuth\Exceptions\TokenBlacklistedException;
+use Kangst\JWTAuth\Providers\JWT\JWT;
 use Kangst\JWTAuth\Support\CustomClaims;
 use Kangst\JWTAuth\Support\RefreshFlow;
-use Kangst\JWTAuth\Contracts\Providers\JWT as JWTContract;
 
 class Manager
 {
     use CustomClaims, RefreshFlow;
 
     /**
-     * The provider.
-     *
-     * @var \Kangst\JWTAuth\Contracts\Providers\JWT
+     * @var Providers\JWT\Lcobucci|Providers\JWT\Namshi
      */
     protected $provider;
 
@@ -57,17 +55,15 @@ class Manager
     protected $persistentClaims = [];
 
     /**
-     * Constructor.
+     * Manager constructor.
      *
-     * @param  JWTContract  $provider
-     * @param  Blacklist  $blacklist
-     * @param  Factory  $payloadFactory
-     *
-     * @return void
+     * @param JWT       $provider
+     * @param Blacklist $blacklist
+     * @param Factory   $payloadFactory
      */
-    public function __construct(JWTContract $provider, Blacklist $blacklist, Factory $payloadFactory)
+    public function __construct(JWT $provider, Blacklist $blacklist, Factory $payloadFactory)
     {
-        $this->provider = $provider;
+        $this->provider = $provider->getProvider();
         $this->blacklist = $blacklist;
         $this->payloadFactory = $payloadFactory;
     }
@@ -78,6 +74,7 @@ class Manager
      * @param Payload $payload
      * @return Token
      * @throws Exceptions\TokenInvalidException
+     * @throws JWTException
      */
     public function encode(Payload $payload)
     {
@@ -89,12 +86,12 @@ class Manager
     /**
      * Decode a Token and return the Payload.
      *
-     * @param  Token  $token
-     * @param  bool  $checkBlacklist
-     *
-     * @throws TokenBlacklistedException
-     *
+     * @param Token $token
+     * @param bool  $checkBlacklist
      * @return Payload
+     * @throws Exceptions\TokenInvalidException
+     * @throws JWTException
+     * @throws TokenBlacklistedException
      */
     public function decode(Token $token, $checkBlacklist = true)
     {

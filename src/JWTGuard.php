@@ -112,7 +112,10 @@ class JWTGuard implements Guard
      *
      * @param array $credentials
      * @return bool
+     * @throws Exceptions\JWTGuardException
      * @throws Exceptions\TokenInvalidException
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:13:54
      */
     public function validate(array $credentials = [])
     {
@@ -221,7 +224,10 @@ class JWTGuard implements Guard
      *
      * @param array $credentials
      * @return bool
+     * @throws Exceptions\JWTGuardException
      * @throws Exceptions\TokenInvalidException
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:14:21
      */
     public function once(array $credentials = [])
     {
@@ -420,10 +426,12 @@ class JWTGuard implements Guard
     /**
      * Determine if the user matches the credentials.
      *
-     * @param  mixed  $user
-     * @param  array  $credentials
-     *
+     * @param $user
+     * @param $credentials
      * @return bool
+     * @throws Exceptions\JWTGuardException
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-17 00:12:59
      */
     protected function hasValidCredentials($user, $credentials)
     {

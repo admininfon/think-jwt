@@ -41,7 +41,13 @@ class JWTAuth extends JWT
      *
      * @param array $credentials
      * @return false|string
+     * @throws Exceptions\JWTException
+     * @throws Exceptions\JWTGuardException
+     * @throws Exceptions\TokenBlacklistedException
      * @throws Exceptions\TokenInvalidException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function attempt(array $credentials)
     {
@@ -57,7 +63,11 @@ class JWTAuth extends JWT
      *
      * @return \Kangst\JWTAuth\Contracts\JWTSubjectInterface|false
      * @throws Exceptions\JWTException
+     * @throws Exceptions\JWTGuardException
      * @throws Exceptions\TokenBlacklistedException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function authenticate()
     {
@@ -75,7 +85,11 @@ class JWTAuth extends JWT
      *
      * @return \Kangst\JWTAuth\Contracts\JWTSubjectInterface|false
      * @throws Exceptions\JWTException
+     * @throws Exceptions\JWTGuardException
      * @throws Exceptions\TokenBlacklistedException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function toUser()
     {
@@ -86,6 +100,11 @@ class JWTAuth extends JWT
      * Get the authenticated user.
      *
      * @return \Kangst\JWTAuth\Contracts\JWTSubjectInterface
+     * @throws Exceptions\JWTException
+     * @throws Exceptions\TokenBlacklistedException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function user()
     {

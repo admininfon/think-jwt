@@ -83,7 +83,7 @@ class User implements UserProvider
     public function retrieveById($identifier)
     {
         $user = $this->auth_model::where('id', $identifier)->find();
-        return $this->getGenericUser($user);
+        return $this->getGenericUser($user ? $user->toArray() : array());
     }
 
     /**
@@ -100,9 +100,8 @@ class User implements UserProvider
      */
     public function retrieveByToken($identifier, $token)
     {
-        $user = $this->getGenericUser(
-            $this->auth_model::where('id', $identifier)->find()
-        );
+        $find = $this->auth_model::where('id', $identifier)->find();
+        $user = $this->getGenericUser($find ? $find->toArray() : array());
 
         return $user && $user->getRememberToken() && hash_equals($user->getRememberToken(), $token)
             ? $user : null;
@@ -165,14 +164,21 @@ class User implements UserProvider
      * @param array           $credentials
      * @return bool
      * @auther Kang Shutian <kst157521@163.com>
-     * @date 2020-03-16 16:11:03
+     * @date 2020-03-17 00:12:44
      */
     public function validateCredentials(Authenticatable $user, array $credentials)
     {
-        foreach ($user as $key => $value) {
-            // todo codeing
-            if ($key) {
-                // password_verify($credentials['password'], $user->getAuthPassword());
+        foreach ($credentials as $key => $value) {
+            if ((!isset($user->$key) || $user->$key != $value) 
+                && strtolower($key) != strtolower($user->getAuthPasswordName())
+            ) {
+                return false;
+            }
+
+            if (strtolower($key) === strtolower($user->getAuthPasswordName())
+                && !password_verify($credentials[$key], $user->getAuthPassword())
+            ) {
+                return false;
             }
         }
         return true;

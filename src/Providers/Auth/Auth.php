@@ -34,6 +34,7 @@ class Auth extends Provider implements AuthInterface
      * @param array $credentials
      * @return bool
      * @throws \Kangst\JWTAuth\Exceptions\TokenInvalidException
+     * @throws \Kangst\JWTAuth\Exceptions\JWTGuardException
      */
     public function byCredentials(array $credentials)
     {
@@ -45,6 +46,10 @@ class Auth extends Provider implements AuthInterface
      *
      * @param mixed $id
      * @return bool
+     * @throws \Kangst\JWTAuth\Exceptions\JWTGuardException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function byId($id)
     {
@@ -57,6 +62,9 @@ class Auth extends Provider implements AuthInterface
      * @return mixed
      * @throws \Kangst\JWTAuth\Exceptions\JWTException
      * @throws \Kangst\JWTAuth\Exceptions\TokenBlacklistedException
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     public function user()
     {

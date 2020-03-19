@@ -152,4 +152,33 @@ class Collection extends ThinkCollection
 
         return value($default);
     }
+
+    /**
+     * map
+     *
+     * @param callable $callback
+     * @return $this|ThinkCollection
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-19 02:23:30
+     */
+    public function map(callable $callback)
+    {
+        $keys = array_keys($this->items);
+
+        $items = array_map($callback, $this->items, $keys);
+
+        return new static(array_combine($keys, $items));
+    }
+
+    /**
+     * keys
+     *
+     * @return $this|array|ThinkCollection
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-19 17:37:10
+     */
+    public function keys()
+    {
+        return new static(array_keys($this->items));
+    }
 }

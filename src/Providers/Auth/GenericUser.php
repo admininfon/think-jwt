@@ -11,6 +11,7 @@
 namespace Kangst\JWTAuth\Providers\Auth;
 
 
+use Kangst\JWTAuth\Claims\Collection;
 use Kangst\JWTAuth\Contracts\Providers\Authenticatable;
 
 class GenericUser implements Authenticatable
@@ -23,14 +24,20 @@ class GenericUser implements Authenticatable
     protected $attributes;
 
     /**
+     * @var array|Collection
+     */
+    public $auth_user;
+
+    /**
      * Create a new generic User object.
      *
-     * @param  array  $attributes
+     * @param  array|Collection  $attributes
      * @return void
      */
-    public function __construct(array $attributes)
+    public function __construct($attributes)
     {
-        $this->attributes = $attributes;
+        $this->auth_user = $attributes;
+        $this->attributes = $attributes instanceof Collection ? $attributes->toArray() : $attributes;
     }
 
     /**
@@ -40,7 +47,7 @@ class GenericUser implements Authenticatable
      */
     public function getAuthIdentifierName()
     {
-        return 'id';
+        return $this->auth_user->getJWTIdentifier();
     }
 
     /**
@@ -106,6 +113,30 @@ class GenericUser implements Authenticatable
     public function getRememberTokenName()
     {
         return 'remember_token';
+    }
+
+    /**
+     * getAuthCustomClaims
+     *
+     * @return array
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-19 02:03:02
+     */
+    public function getAuthCustomClaims()
+    {
+        return $this->auth_user->getJWTCustomClaims();
+    }
+
+    /**
+     * user
+     *
+     * @return array|Collection|null
+     * @auther Kang Shutian <kst157521@163.com>
+     * @date 2020-03-19 18:02:44
+     */
+    public function user()
+    {
+        return $this->attributes ?? $this->auth_user;
     }
 
     /**

@@ -11,6 +11,7 @@
 namespace Kangst\JWTAuth\Providers\Auth;
 
 
+use Kangst\JWTAuth\Claims\Collection;
 use Kangst\JWTAuth\Contracts\Providers\Authenticatable;
 use Kangst\JWTAuth\Contracts\Providers\UserProvider;
 use Kangst\JWTAuth\Exceptions\JWTGuardException;
@@ -143,18 +144,19 @@ class User implements UserProvider
         // generic "user" object that will be utilized by the Guard instances.
         $query = $this->auth_model;
 
+        $where = array();
         foreach ($credentials as $key => $value) {
             if (! Str::contains($key, 'password')) {
-                $query->where($key, $value);
+                $where[$key] = $value;
             }
         }
 
         // Now we are ready to execute the query to see if we have an user matching
         // the given credentials. If not, we will just return nulls and indicate
         // that there are no matching users for these given credential arrays.
-        $user = $query->find();
+        $user = $query->where($where)->find();
 
-        return $this->getGenericUser($user ? $user->toArray() : array());
+        return $this->getGenericUser($user);
     }
 
     /**

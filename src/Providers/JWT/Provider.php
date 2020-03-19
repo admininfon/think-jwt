@@ -166,7 +166,7 @@ abstract class Provider
      */
     protected function getSigningKey()
     {
-        return $this->isAsymmetric() ? $this->getPrivateKey() : $this->getSecret();
+        return $this->isAsymmetric() ? $this->getSecret() : $this->getPrivateKey();
     }
 
     /**
@@ -177,7 +177,7 @@ abstract class Provider
      */
     protected function getVerificationKey()
     {
-        return $this->isAsymmetric() ? $this->getPublicKey() : $this->getSecret();
+        return $this->isAsymmetric() ? $this->getSecret() : $this->getPublicKey();
     }
 
     /**

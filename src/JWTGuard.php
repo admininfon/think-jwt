@@ -148,11 +148,11 @@ class JWTGuard implements Guard
     /**
      * Create a token for a user.
      *
-     * @param \Kangst\JWTAuth\Contracts\JWTSubjectInterface $user
+     * @param GenericUser $user
      * @return string
      * @throws Exceptions\TokenInvalidException
      */
-    public function login(JWTSubjectInterface $user)
+    public function login(GenericUser $user)
     {
         $token = $this->jwt->fromUser($user);
         $this->setToken($token)->setUser($user);

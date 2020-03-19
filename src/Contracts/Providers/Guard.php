@@ -11,6 +11,8 @@
 namespace Kangst\JWTAuth\Contracts\Providers;
 
 
+use Kangst\JWTAuth\Providers\Auth\GenericUser;
+
 interface Guard
 {
     /**
@@ -30,7 +32,7 @@ interface Guard
     /**
      * Get the currently authenticated user.
      *
-     * @return \Kangst\JWTAuth\Contracts\Providers\Authenticatable|null
+     * @return GenericUser|null
      * @auther Kang Shutian <kst157521@163.com>
      * @date 2020-03-15 14:11:47
      */
@@ -54,10 +56,10 @@ interface Guard
     /**
      * Set the current user.
      *
-     * @param \Kangst\JWTAuth\Contracts\Providers\Authenticatable $user
+     * @param GenericUser $user
      * @return mixed
      * @auther Kang Shutian <kst157521@163.com>
      * @date 2020-03-15 14:12:56
      */
-    public function setUser(Authenticatable $user);
+    public function setUser(GenericUser $user);
 }

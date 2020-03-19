@@ -24,7 +24,6 @@ return [
     | since RSA and ECDSA use a private/public key combo (See below).
     |
     */
-
     'secret' => env('JWT_SECRET', null),
 
     /*
@@ -43,7 +42,6 @@ return [
     | RS256, RS384 & RS512 / ES256, ES384 & ES512 will use the keys below.
     |
     */
-
     'keys' => [
 
         /*
@@ -56,7 +54,6 @@ return [
         | E.g. 'file://path/to/public/key'
         |
         */
-
         'public' => env('JWT_PUBLIC_KEY'),
 
         /*
@@ -69,7 +66,6 @@ return [
         | E.g. 'file://path/to/private/key'
         |
         */
-
         'private' => env('JWT_PRIVATE_KEY'),
 
         /*
@@ -80,7 +76,6 @@ return [
         | The passphrase for your private key. Can be null if none set.
         |
         */
-
         'passphrase' => env('JWT_PASSPHRASE'),
 
     ],
@@ -100,7 +95,6 @@ return [
     | Notice: If you set this to null you should remove 'exp' element from 'required_claims' list.
     |
     */
-
     'ttl' => env('JWT_TTL', 60),
 
     /*
@@ -119,7 +113,6 @@ return [
     | systems in place to revoke the token if necessary.
     |
     */
-
     'refresh_ttl' => env('JWT_REFRESH_TTL', 20160),
 
     /*
@@ -133,7 +126,6 @@ return [
     | for possible values.
     |
     */
-
     'algo' => env('JWT_ALGO', 'HS256'),
 
     /*
@@ -146,7 +138,6 @@ return [
     | present in the payload.
     |
     */
-
     'required_claims' => [
         'iss',
         'iat',
@@ -168,7 +159,6 @@ return [
     | Note: If a claim does not exist then it will be ignored.
     |
     */
-
     'persistent_claims' => [
         // 'foo',
         // 'bar',
@@ -190,7 +180,6 @@ return [
     | a little on token size.
     |
     */
-
     'lock_subject' => true,
 
     /*
@@ -207,7 +196,6 @@ return [
     | Specify in seconds - only if you know you need it.
     |
     */
-
     'leeway' => env('JWT_LEEWAY', 0),
 
     /*
@@ -219,7 +207,6 @@ return [
     | If you do not want or need this functionality, then set this to false.
     |
     */
-
     'blacklist_enabled' => env('JWT_BLACKLIST_ENABLED', true),
 
     /*
@@ -234,7 +221,6 @@ return [
     | Set grace period in seconds to prevent parallel request failure.
     |
     */
-
     'blacklist_grace_period' => env('JWT_BLACKLIST_GRACE_PERIOD', 0),
 
     /*
@@ -252,8 +238,52 @@ return [
     | Set it to true if you want to decrypt cookies.
     |
     */
-
     'decrypt_cookies' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Providers
+    |--------------------------------------------------------------------------
+    |
+    | Specify the various providers used throughout the package.
+    |
+    */
+    'providers' => [
+
+        /*
+        |--------------------------------------------------------------------------
+        | JWT Provider
+        |--------------------------------------------------------------------------
+        |
+        | 配置jwt服务组件，可选项：1、LCOBUCCI 2、NAMSHI
+        |
+        */
+
+        'jwt' => \Kangst\JWTAuth\Providers\JWT\JWT::LCOBUCCI,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Authentication Provider
+        |--------------------------------------------------------------------------
+        |
+        | Specify the provider that is used to authenticate users.
+        |
+        */
+
+        'auth' => \Kangst\JWTAuth\Providers\Auth\Auth::class,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Storage Provider
+        |--------------------------------------------------------------------------
+        |
+        | Specify the provider that is used to store tokens in the blacklist.
+        |
+        */
+
+        'storage' => \Kangst\JWTAuth\Providers\Storage\Storage::class,
+
+    ],
 
     /*
      * ------------------------------------------------------------------------

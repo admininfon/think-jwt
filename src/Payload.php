@@ -37,13 +37,7 @@ class Payload implements \ArrayAccess, Arrayable,\Countable, Jsonable, \JsonSeri
      */
     public function __construct(Collection $claims, PayloadValidator $validator, $refreshFlow = false)
     {
-        try {
-            $this->claims = $validator->setRefreshFlow($refreshFlow)->check((array)$claims);
-        } catch (Exceptions\TokenExpiredException $e) {
-
-        } catch (Exceptions\TokenInvalidException $e) {
-
-        }
+        $this->claims = $validator->setRefreshFlow($refreshFlow)->check($claims);
     }
 
     /**

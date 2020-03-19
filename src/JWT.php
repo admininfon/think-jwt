@@ -254,7 +254,7 @@ class JWT
     {
         return array_merge(
             $this->getClaimsForSubject($subject),
-            $subject->getJWTCustomClaims(), // custom claims from JWTSubject method
+            $subject->getAuthCustomClaims(), // custom claims from GenericUser method
             $this->customClaims // custom claims from inline setter
         );
     }
@@ -270,7 +270,7 @@ class JWT
     protected function getClaimsForSubject(GenericUser $subject)
     {
         return array_merge([
-            'sub' => $subject->getJWTIdentifier(),
+            'sub' => $subject->getAuthIdentifierName(),
         ], $this->lockSubject ? ['prv' => $this->hashSubjectModel($subject)] : []);
     }
 

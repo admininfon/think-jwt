@@ -114,7 +114,7 @@ class Factory
      */
     protected function addClaim($name, $value)
     {
-        $this->claims->push($name, $value);
+        $this->claims->push($value, $name);
 
         return $this;
     }

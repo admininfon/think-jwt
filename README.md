@@ -3,7 +3,7 @@ thinkphp json web token package, By unofficial.
 
 ## 使用扩展包
 - **composer request kangst/think-jwt**
-- **加载命令文件到服务并还行命令创建jwt.php配置文件**
+- **加载命令文件到服务并执行命令创建jwt.php配置文件**
 ~~~
 PATH:
 application/command.php

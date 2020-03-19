@@ -27,7 +27,7 @@
         }
     },
     "require": {
-        "php": ">=5.6.0",
+        "php": "^5.5.9|^7.0",
         "topthink/framework": "5.1.*",
         "topthink/think-helper": "^3.1",
         "nesbot/carbon": "^2.26",

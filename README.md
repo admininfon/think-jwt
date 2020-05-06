@@ -60,6 +60,6 @@ class User extends Base
 }
 ~~~
 
-## 还在完善初中，请多多Fork
+## 还在完善中，请多多Fork
 项目地址：[github](https://github.com/admininfon/think-jwt)<br> 
 URL:https://github.com/admininfon/think-jwt

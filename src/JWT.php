@@ -11,7 +11,6 @@
 namespace Kangst\JWTAuth;
 
 
-use Kangst\JWTAuth\Contracts\JWTSubjectInterface;
 use Kangst\JWTAuth\Contracts\Providers\Authenticatable;
 use Kangst\JWTAuth\Exceptions\JWTException;
 use Kangst\JWTAuth\Http\Parser\Parser;

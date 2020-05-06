@@ -17,7 +17,7 @@ class Namshi extends Provider implements JWT
      *
      * @var \Namshi\JOSE\JWS;
      */
-    protected $jwt;
+    protected $jws;
 
     /**
      * Constructor.
@@ -48,7 +48,7 @@ class Namshi extends Provider implements JWT
     public function encode(array $payload)
     {
         try {
-            $this->jwt->setPayload($payload)->sign($this->getSigningKey(), $this->getPassphrase());
+            $this->jws->setPayload($payload)->sign($this->getSigningKey(), $this->getPassphrase());
 
             return (string) $this->jws->getTokenString();
         } catch (\Exception $e) {

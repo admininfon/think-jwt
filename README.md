@@ -6,19 +6,18 @@ thinkphp json web token package, By unofficial.
 - **加载命令文件到服务并执行命令创建jwt.php配置文件**
 ~~~
 PATH:
-application/command.php
+config/console.php
 
 CODE:
 return [
-    \Kangst\JWTAuth\Console\GenerateConfigFile::class,
-];
-
-return [
-    'command alias' => \Kangst\JWTAuth\Console\GenerateConfigFile::class,
+    // 指令定义
+    'commands' => [
+        'jwt:generate' => \Kangst\JWTAuth\Console\GenerateConfigFile::class,
+    ],
 ];
 
 RUN COMMAND:
-php think jwt:generate_jwt
+php think jwt:generate
 ~~~
 - **jwt使用**
 ~~~

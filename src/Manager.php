@@ -173,7 +173,7 @@ class Manager
         // persist the relevant claims
         return array_merge(
             $this->customClaims,
-            compact($this->persistentClaims, 'sub', 'iat')
+            compact($this->persistentClaims, $params = ['sub', 'iat'])
         );
     }
 

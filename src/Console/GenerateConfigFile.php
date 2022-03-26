@@ -14,9 +14,12 @@ use think\helper\Str;
 
 class GenerateConfigFile extends Command
 {
+    /**
+     * configure
+     */
     protected function configure()
     {
-        $this->setName('jwt:generate_jwt')
+        $this->setName('jwt:generate')
             ->addOption('force', null, Option::VALUE_NONE, 'Force refresh secret')
             ->addOption('create', null, Option::VALUE_NONE,
                 'The secret was successfully created, please configure it yourself'

@@ -38,5 +38,13 @@
         "psr-4": {
             "Kangst\\JWTAuth\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kangst\\JWTAuth\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "8.5.x-dev"
     }
 }
